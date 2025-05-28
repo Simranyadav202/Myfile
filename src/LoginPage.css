@@ -85,12 +85,12 @@ background-color: #114255;
 }
 
 .login-form button:hover {
-  background-color: #00b393;
+  background-color: #14aff1;
 }
 .login-form input:focus {
   outline: none;
-  border-color: #00c9a7;
-  box-shadow: 0 0 8px #00c9a7;
+  border-color: #3e18e8;
+  box-shadow: 0 0 8px #16b4e4;
 }
 
 .auth-links {

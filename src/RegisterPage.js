@@ -9,16 +9,14 @@ const RegisterPage = () => {
         <h2 className="register-title">Register on TrackKit</h2>
 
         <form className="register-form">
-          {/* first + last name side-by-side */}
           <div className="name-fields">
             <input type="text" placeholder="First Name" required />
             <input type="text" placeholder="Last Name" required />
           </div>
-           <input type="date" placeholder="Fill Your Age" required />
+          <input type="date" placeholder="Fill Your Age" required />
           <input type="email" placeholder="Email" required />
           <input type="password" placeholder="Password" required />
           <input type="password" placeholder="Confirm Password" required />
-
           <button type="submit">Register</button>
         </form>
 
