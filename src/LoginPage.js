@@ -1,24 +1,46 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const emailIsValid = email.includes('@');
-    const passwordIsValid = password.length >= 6;
-
     setEmailError(!emailIsValid);
-    setPasswordError(!passwordIsValid);
+    setLoginError('');
 
-    if (emailIsValid && passwordIsValid) {
-      console.log('Login successful!');
+    if (!emailIsValid) return;
+
+    try {
+      setIsLoading(true);
+      const res = await axios.post(
+        'http://localhost:5000/api/auth/login',
+        { email, password },
+        { withCredentials: true } // if your backend uses cookies
+      );
+
+      if (res.status === 200) {
+        localStorage.setItem('token', res.data.token);
+        console.log('Login successful');
+        navigate('/MaterialDashboard');
+      } else {
+        setLoginError('Login failed. Please check your credentials.');
+      }
+    } catch (err) {
+      const message = err.response?.data?.message || 'Login failed. Try again.';
+      setLoginError(message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -39,6 +61,7 @@ const LoginPage = () => {
 
         <form className="login-form" onSubmit={handleSubmit}>
           <h2 className="form-title">Login to TrackKit</h2>
+
           <input
             type="email"
             placeholder="Email"
@@ -47,15 +70,20 @@ const LoginPage = () => {
             className={emailError ? 'input-error' : ''}
             required
           />
+
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className={passwordError ? 'input-error' : ''}
             required
           />
-          <button type="submit">Login</button>
+
+          {loginError && <p className="error-message">{loginError}</p>}
+
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Login'}
+          </button>
         </form>
 
         <div className="auth-links">

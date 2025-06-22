@@ -12,20 +12,21 @@ const LandingPage = () => {
   return (
     <div
       className="landing-page"
-      style={{
+
+
+        style={{
         backgroundImage: `url(${process.env.PUBLIC_URL}/page.jpg)`,
       }}
     >
       <div className="overlay">
         <div className="content">
           <div className="logo-title">
-            <img
-              src={`${process.env.PUBLIC_URL}/image.png`}
-              alt="Logo"
-              className="logo"
+            <img src={`${process.env.PUBLIC_URL}/image.png`} alt="Logo"
+            className="logo"
             />
             <h1 className="title">TrackKit</h1>
           </div>
+          
           <button className="login-button" onClick={handleLoginClick}>
             Enter
           </button>

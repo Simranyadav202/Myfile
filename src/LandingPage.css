@@ -40,7 +40,7 @@
   font-size: 4rem;
   font-weight: 800;
   color: #000;
-  /* text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6); */
+ 
 }
 
 .login-button {
@@ -55,6 +55,7 @@
   cursor: pointer;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
+  /*This would make the button gently scale up when hovered. If you want help integrating this into a component or refining the effect, feel free to share more!*/
 }
 
 .login-button:hover {
