@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
       email: form.email,
       password: form.password,
       dob: form.dob,
-      role_id: 2 
+      role_id: 2
     });
     if (res.status === 201) {
       alert('Registered successfully');
